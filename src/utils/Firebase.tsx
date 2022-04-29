@@ -2,6 +2,7 @@
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { Card, Container } from 'react-bootstrap';
 
 // Configure Firebase.
 const config = {
@@ -39,11 +40,24 @@ const uiConfig = {
 
 // use the imported firebase ui block to log in with
 export function SignIn() {
-    return <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />;
+    return (
+      <Container className="w-25">
+        <Card className="text-center">
+          <Card.Body>
+            <Card.Title>Sign in</Card.Title>
+            <Card.Text>
+              You need to sign in to continue.
+            </Card.Text>
+          </Card.Body>
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+        </Card>
+      </Container>
+    )      
 }
 
 // sign the user out and remove all storage items
 export async function SignOut() {
     await firebase.auth().signOut();
     sessionStorage.clear();
+    window.location.pathname = '/';
 }

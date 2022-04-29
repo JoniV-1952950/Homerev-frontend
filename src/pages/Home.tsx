@@ -6,12 +6,14 @@ import Search from "../components/Search";
 import type {PatientCardsListQuery} from '../components/__generated__/PatientCardsListQuery.graphql';
 import RelayEnvironment from "../utils/RelayEnvironment";
 import firebase from "firebase/compat/app";
+import { CreatePatientModal } from "../components/CreatePatientModal";
 
 interface IProps {
 }
 
 interface IState {
-    preloadedQuery: PreloadedQuery<PatientCardsListQuery, {}>
+    preloadedQuery: PreloadedQuery<PatientCardsListQuery, {}>,
+    showCreatePatientModal: boolean
 }
 
 class Home extends React.Component<IProps, IState> {
@@ -23,9 +25,12 @@ class Home extends React.Component<IProps, IState> {
                                     perPage: 12,
                                     therapistId: firebase.auth().currentUser?.uid as string,
                                 }),
+            showCreatePatientModal: false
+
         };
         // bind this function to this class so we can access the state in other components
         this.searchPatients = this.searchPatients.bind(this); 
+        this.showCreatePatientModal = this.showCreatePatientModal.bind(this);
     }
     
     // load a new query, this time with the given input in the searchbar
@@ -40,6 +45,10 @@ class Home extends React.Component<IProps, IState> {
             });
     }
 
+    showCreatePatientModal(show: boolean) {
+        this.setState({showCreatePatientModal: show});
+    }
+
     // render the home page
     render() {
         return (
@@ -47,10 +56,11 @@ class Home extends React.Component<IProps, IState> {
                 <Stack gap={3}>
                     <Search searchPatients={this.searchPatients}/>
                     <Container className="w-75">
-                        <Button variant="dark" className="float-end">Add new patient</Button>
+                        <Button variant="dark" className="float-end" onClick={() => this.showCreatePatientModal(true)}>Add new patient</Button>
                     </Container>
                     <PatientCardsList preloadedQuery={this.state.preloadedQuery}/>
                 </Stack>
+                <CreatePatientModal show={this.state.showCreatePatientModal} setShow={this.showCreatePatientModal}/>
             </>);
     }
 }

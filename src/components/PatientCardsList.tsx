@@ -63,7 +63,7 @@ function PatientCardsList(props: {preloadedQuery: PreloadedQuery<PatientCardsLis
 
 // defines a placeholder for when the query is still loading
 const placeholder = (
-  <Container className="w-50">
+  <Container className="w-75">
   <Row xs={1} md={2} className="g-4">
     {Array.from({ length: 12}).map((_, idx) => (
         <Col key={idx}>
