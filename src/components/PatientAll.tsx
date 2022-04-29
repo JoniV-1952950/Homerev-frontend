@@ -9,8 +9,8 @@ import { Card, ListGroup, ListGroupItem, Placeholder, Stack, Tab, Tabs } from "r
 
 // Define a query
 export const patientAllQuery = graphql`
- query PatientAllQuery($perPage: Int!, $patientId: String!) {
-    getPatient(id: $patientId) {
+ query PatientAllQuery($pagination: Pagination!, $patientId: String!) {
+    patient(id: $patientId) {
         ...PatientCard_patient
         ...TaskList_tasks
     }
@@ -26,13 +26,13 @@ function PatientAll(props: IProps){
     return (
         <>
             <Stack gap={3}>            
-                <PatientCard patient={data.getPatient}/>
+                <PatientCard patient={data.patient}/>
                 <Tabs defaultActiveKey="tasks">
                     <Tab eventKey="tasks" title="Tasks">
-                        <TaskList tasks={data.getPatient}/>
+                        <TaskList tasks={data.patient}/>
                     </Tab>
                     <Tab eventKey="todos" title="Todos">
-                        <PatientCard patient={data.getPatient} />
+                        <PatientCard patient={data.patient} />
                     </Tab>
                 </Tabs>
             </Stack>

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c7da3e0f772ff831778bf5c090217ff5>>
+ * @generated SignedSource<<2fc3c4bbca82d8d3e5f3634a73996695>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,12 +10,18 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type PatientAllQuery$variables = {
+export type Pagination = {
+  next?: boolean | null;
+  afterDocID?: string | null;
+  beforeDocID?: string | null;
   perPage: number;
+};
+export type PatientAllQuery$variables = {
+  pagination: Pagination;
   patientId: string;
 };
 export type PatientAllQuery$data = {
-  readonly getPatient: {
+  readonly patient: {
     readonly " $fragmentSpreads": FragmentRefs<"PatientCard_patient" | "TaskList_tasks">;
   };
 };
@@ -25,38 +31,40 @@ export type PatientAllQuery = {
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "patientId"
-},
-v1 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "perPage"
-},
-v2 = [
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "pagination"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "patientId"
+  }
+],
+v1 = [
   {
     "kind": "Variable",
     "name": "id",
     "variableName": "patientId"
   }
 ],
-v3 = {
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v4 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "telephone",
   "storageKey": null
 },
-v5 = {
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -65,20 +73,17 @@ v5 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": [
-      (v0/*: any*/),
-      (v1/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "PatientAllQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v2/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "Patient",
         "kind": "LinkedField",
-        "name": "getPatient",
+        "name": "patient",
         "plural": false,
         "selections": [
           {
@@ -100,22 +105,19 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [
-      (v1/*: any*/),
-      (v0/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "PatientAllQuery",
     "selections": [
       {
         "alias": null,
-        "args": (v2/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "Patient",
         "kind": "LinkedField",
-        "name": "getPatient",
+        "name": "patient",
         "plural": false,
         "selections": [
-          (v3/*: any*/),
+          (v2/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -137,7 +139,7 @@ return {
             "name": "condition",
             "storageKey": null
           },
-          (v4/*: any*/),
+          (v3/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -153,9 +155,9 @@ return {
             "name": "therapists",
             "plural": true,
             "selections": [
+              (v2/*: any*/),
               (v3/*: any*/),
-              (v4/*: any*/),
-              (v5/*: any*/)
+              (v4/*: any*/)
             ],
             "storageKey": null
           },
@@ -164,13 +166,13 @@ return {
             "args": [
               {
                 "kind": "Variable",
-                "name": "perPage",
-                "variableName": "perPage"
+                "name": "pagination",
+                "variableName": "pagination"
               }
             ],
             "concreteType": "Task",
             "kind": "LinkedField",
-            "name": "tasksNext",
+            "name": "tasks",
             "plural": true,
             "selections": [
               {
@@ -194,7 +196,7 @@ return {
                 "name": "type",
                 "storageKey": null
               },
-              (v5/*: any*/)
+              (v4/*: any*/)
             ],
             "storageKey": null
           }
@@ -204,16 +206,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "ac5f716e0a08de4a11e1edbb7a83e21c",
+    "cacheID": "77e6a6e6d9c142888a76e3509102a7e8",
     "id": null,
     "metadata": {},
     "name": "PatientAllQuery",
     "operationKind": "query",
-    "text": "query PatientAllQuery(\n  $perPage: Int!\n  $patientId: String!\n) {\n  getPatient(id: $patientId) {\n    ...PatientCard_patient\n    ...TaskList_tasks\n  }\n}\n\nfragment PatientCard_patient on Patient {\n  name\n  birthdate\n  address\n  condition\n  telephone\n  gender\n  therapists {\n    name\n    telephone\n    id\n  }\n}\n\nfragment TaskList_tasks on Patient {\n  tasksNext(perPage: $perPage) {\n    dateCreated\n    task\n    type\n    id\n  }\n}\n"
+    "text": "query PatientAllQuery(\n  $pagination: Pagination!\n  $patientId: String!\n) {\n  patient(id: $patientId) {\n    ...PatientCard_patient\n    ...TaskList_tasks\n  }\n}\n\nfragment PatientCard_patient on Patient {\n  name\n  birthdate\n  address\n  condition\n  telephone\n  gender\n  therapists {\n    name\n    telephone\n    id\n  }\n}\n\nfragment TaskList_tasks on Patient {\n  tasks(pagination: $pagination) {\n    dateCreated\n    task\n    type\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "be7c757aad21682ef86dd2919230ee90";
+(node as any).hash = "dad956e0db33ec8fd900f11ea0c3cee0";
 
 export default node;

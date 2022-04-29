@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Home from '../pages/Home';
-import Patient from '../pages/Patient';
+import Home from './Home';
+import Patient from './Patient';
 
 // render different pages based on url
 const Main = () => {

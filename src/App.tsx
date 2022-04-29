@@ -5,7 +5,7 @@ import 'firebase/compat/auth';
 import { LoginModal } from './components/LoginModal'; 
 import { Button } from 'react-bootstrap';
 import React from 'react';
-import Main from "./components/Main";
+import Main from "./pages/Main";
 
 interface IProps{}
 

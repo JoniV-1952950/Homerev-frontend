@@ -19,7 +19,9 @@ class Patient extends React.Component<IProps, IState> {
         this.state = {
             preloadedQuery: loadQuery<PatientAllQuery>(RelayEnvironment, patientAllQuery, {
                                     patientId: window.location.href.split('/')[4],
-                                    perPage: 10
+                                    pagination: {
+                                        perPage: 10
+                                    }
                                 }),
         }
     }

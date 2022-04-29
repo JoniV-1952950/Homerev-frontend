@@ -20,7 +20,9 @@ class Home extends React.Component<IProps, IState> {
         // load the query already to save some time when we want to render it
         this.state = {
             preloadedQuery: loadQuery<PatientCardsListQuery>(RelayEnvironment, patientCardsListQuery, {
-                                    perPage: 12,
+                                    pagination: {
+                                        perPage: 12
+                                    },
                                     therapistId: firebase.auth().currentUser?.uid as string,
                                 }),
         };
@@ -33,7 +35,9 @@ class Home extends React.Component<IProps, IState> {
         this.setState(
             {
                 preloadedQuery: loadQuery<PatientCardsListQuery>(RelayEnvironment, patientCardsListQuery, {
-                        perPage: 12,
+                        pagination: {
+                            perPage: 12
+                        },
                         therapistId: firebase.auth().currentUser?.uid as string,
                         name: value
                     })

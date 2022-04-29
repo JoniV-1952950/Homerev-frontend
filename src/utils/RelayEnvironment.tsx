@@ -4,7 +4,7 @@ async function fetchGraphQL(text: string, variables: any) {
   // get the current users token  
   const token = sessionStorage.getItem("token");
   // fetch request from the backendserver
-  const response = await fetch('https://europe-west1-homerev-users.cloudfunctions.net/graphql', {
+  const response = await fetch('https://europe-west1-homerev-users.cloudfunctions.net/v1', {
     method: 'POST',
     headers: {
       //give the token as Authorization header, so the requests are authorized

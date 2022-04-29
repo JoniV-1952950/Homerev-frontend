@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0ae5fdb938fb82f61c42e3f41f9ec7c7>>
+ * @generated SignedSource<<749a5ef2c35c75c267964c6e432d5872>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,13 +10,19 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 export type Gender = "M" | "V" | "X" | "%future added value";
-export type PatientCardsListQuery$variables = {
+export type Pagination = {
+  next?: boolean | null;
+  afterDocID?: string | null;
+  beforeDocID?: string | null;
   perPage: number;
+};
+export type PatientCardsListQuery$variables = {
+  pagination: Pagination;
   therapistId: string;
   name?: string | null;
 };
 export type PatientCardsListQuery$data = {
-  readonly getPatientsOfTherapistNext: ReadonlyArray<{
+  readonly patientsOfTherapist: ReadonlyArray<{
     readonly name: string;
     readonly condition: string;
     readonly gender: Gender;
@@ -37,7 +43,7 @@ var v0 = {
 v1 = {
   "defaultValue": null,
   "kind": "LocalArgument",
-  "name": "perPage"
+  "name": "pagination"
 },
 v2 = {
   "defaultValue": null,
@@ -60,13 +66,13 @@ v3 = [
       },
       {
         "kind": "Variable",
-        "name": "perPage",
-        "variableName": "perPage"
+        "name": "pagination",
+        "variableName": "pagination"
       }
     ],
     "concreteType": "Patient",
     "kind": "LinkedField",
-    "name": "getPatientsOfTherapistNext",
+    "name": "patientsOfTherapist",
     "plural": true,
     "selections": [
       {
@@ -127,16 +133,16 @@ return {
     "selections": (v3/*: any*/)
   },
   "params": {
-    "cacheID": "e2127dd6bf425f03faf36e46097c15b8",
+    "cacheID": "8e15cb8ef6ff1ecdc79611921f9471d3",
     "id": null,
     "metadata": {},
     "name": "PatientCardsListQuery",
     "operationKind": "query",
-    "text": "query PatientCardsListQuery(\n  $perPage: Int!\n  $therapistId: String!\n  $name: String\n) {\n  getPatientsOfTherapistNext(perPage: $perPage, id: $therapistId, name: $name) {\n    name\n    condition\n    gender\n    id\n  }\n}\n"
+    "text": "query PatientCardsListQuery(\n  $pagination: Pagination!\n  $therapistId: String!\n  $name: String\n) {\n  patientsOfTherapist(pagination: $pagination, id: $therapistId, name: $name) {\n    name\n    condition\n    gender\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "e0322eefbc078fa56bf66e1cfe34f9f1";
+(node as any).hash = "e09c296f74a86b903c1b59451bc2b09f";
 
 export default node;

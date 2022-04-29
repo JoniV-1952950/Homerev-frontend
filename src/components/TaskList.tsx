@@ -8,7 +8,7 @@ import { Card, ListGroup, ListGroupItem, Tab } from "react-bootstrap";
 // Define a query
 const taskListFragment = graphql`
     fragment TaskList_tasks on Patient {
-            tasksNext(perPage: $perPage){
+            tasks(pagination: $pagination){
             dateCreated
             task
             type
@@ -22,7 +22,7 @@ interface IProps {
 }
 
 export function TaskList(props: IProps){
-    const data = useFragment(taskListFragment, props.tasks).tasksNext;
+    const data = useFragment(taskListFragment, props.tasks).tasks;
     return (
         <>
             <ListGroup variant="flush">

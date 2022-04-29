@@ -15,8 +15,8 @@ const { Suspense } = React;
 
 // Define a query
 export const patientCardsListQuery = graphql`
- query PatientCardsListQuery($perPage: Int!, $therapistId: String!, $name: String) {
-  getPatientsOfTherapistNext(perPage: $perPage, id: $therapistId, name:$name) {
+ query PatientCardsListQuery($pagination: Pagination!, $therapistId: String!, $name: String) {
+  patientsOfTherapist(pagination: $pagination, id: $therapistId, name: $name) {
     name
     condition
     gender
@@ -35,7 +35,7 @@ export const patientCardsListQuery = graphql`
 // - If the query failed, it throws the failure error. For simplicity we aren't
 //   handling the failure case here.
 function PatientCardsList(props: {preloadedQuery: PreloadedQuery<PatientCardsListQuery, {}>}) {
-    const data = usePreloadedQuery(patientCardsListQuery, props.preloadedQuery).getPatientsOfTherapistNext;
+    const data = usePreloadedQuery(patientCardsListQuery, props.preloadedQuery).patientsOfTherapist;
 
     return (
         <Container className="w-75">

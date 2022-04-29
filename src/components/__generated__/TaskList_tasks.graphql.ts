@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d8aaa1e55c07e8a6888931b67989cb08>>
+ * @generated SignedSource<<e653192d385b8e859c2fdbcfc18fb86d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,7 +12,7 @@ import { Fragment, ReaderFragment } from 'relay-runtime';
 export type ProjectType = "bimanueel" | "VR" | "%future added value";
 import { FragmentRefs } from "relay-runtime";
 export type TaskList_tasks$data = {
-  readonly tasksNext: ReadonlyArray<{
+  readonly tasks: ReadonlyArray<{
     readonly dateCreated: any;
     readonly task: any;
     readonly type: ProjectType;
@@ -29,7 +29,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [
     {
       "kind": "RootArgument",
-      "name": "perPage"
+      "name": "pagination"
     }
   ],
   "kind": "Fragment",
@@ -41,13 +41,13 @@ const node: ReaderFragment = {
       "args": [
         {
           "kind": "Variable",
-          "name": "perPage",
-          "variableName": "perPage"
+          "name": "pagination",
+          "variableName": "pagination"
         }
       ],
       "concreteType": "Task",
       "kind": "LinkedField",
-      "name": "tasksNext",
+      "name": "tasks",
       "plural": true,
       "selections": [
         {
@@ -86,6 +86,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "4c599907e40ff2f8fd0201489a47b0de";
+(node as any).hash = "470f7108044c149fd5843affb99ae823";
 
 export default node;
