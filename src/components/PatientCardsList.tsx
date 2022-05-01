@@ -9,6 +9,7 @@ import RelayEnvironment from "../utils/RelayEnvironment";
 import { Card, Col, Container, Placeholder, Row } from 'react-bootstrap';
 import type {PatientCardsListQuery} from '../components/__generated__/PatientCardsListQuery.graphql';
 import { Link } from 'react-router-dom';
+import { Variables } from '../utils/Variables';
 
 
 const { Suspense } = React;
@@ -24,7 +25,6 @@ export const patientCardsListQuery = graphql`
   }
 }
 `;
-
 
 // Inner component that reads the preloaded query results via `usePreloadedQuery()`.
 // This works as follows:
@@ -42,7 +42,7 @@ function PatientCardsList(props: {preloadedQuery: PreloadedQuery<PatientCardsLis
           <Row xs={1} md={2} className="g-4">
             {data.map((patient) => (
               <Col key={patient?.id}>
-                <Link style={{textDecoration: "none"}}to={'/patient/' + patient?.id}>
+                <Link style={{textDecoration: "none"}}to={Variables.PATIENT_URL + patient?.id}>
                   <Card text="dark">
                     <Card.Body>
                       <Card.Title>{patient?.name}</Card.Title>
@@ -63,16 +63,16 @@ function PatientCardsList(props: {preloadedQuery: PreloadedQuery<PatientCardsLis
 
 // defines a placeholder for when the query is still loading
 const placeholder = (
-  <Container className="w-50">
+  <Container className="w-75">
   <Row xs={1} md={2} className="g-4">
-    {Array.from({ length: 12}).map((_, idx) => (
+    {Array.from({ length: Variables.PATIENTS_PER_PAGE}).map((_, idx) => (
         <Col key={idx}>
             <Card>
             <Card.Body>
-              <Placeholder as={Card.Title} animation="glow">
+              <Placeholder as={Card.Title} animation={Variables.PLACEHOLDER_ANIMATION}>
                 <Placeholder xs={6} />
               </Placeholder>
-              <Placeholder as={Card.Text} animation="glow">
+              <Placeholder as={Card.Text} animation={Variables.PLACEHOLDER_ANIMATION}>
                 <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
                 <Placeholder xs={6} /> <Placeholder xs={8} />
               </Placeholder>

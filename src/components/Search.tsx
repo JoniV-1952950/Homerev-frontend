@@ -16,6 +16,7 @@ class Search extends React.Component<IProps, IState> {
         this.state = {
             searchName: null
         }
+        // bind the function to this component
         this.handleKeyPress = this.handleKeyPress.bind(this); 
     }
 

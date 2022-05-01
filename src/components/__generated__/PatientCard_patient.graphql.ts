@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<de710a8fe64b89009410e9c45136ace4>>
+ * @generated SignedSource<<c849bba2490bee2f4ee81bcc9662ff3f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -15,12 +15,14 @@ export type PatientCard_patient$data = {
   readonly name: string;
   readonly birthdate: any;
   readonly address: string;
+  readonly email: string;
   readonly condition: string;
   readonly telephone: string;
   readonly gender: Gender;
   readonly therapists: ReadonlyArray<{
     readonly name: string;
     readonly telephone: string;
+    readonly email: string;
     readonly id: string;
   } | null>;
   readonly " $fragmentType": "PatientCard_patient";
@@ -39,6 +41,13 @@ var v0 = {
   "storageKey": null
 },
 v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "email",
+  "storageKey": null
+},
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -66,6 +75,7 @@ return {
       "name": "address",
       "storageKey": null
     },
+    (v1/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -73,7 +83,7 @@ return {
       "name": "condition",
       "storageKey": null
     },
-    (v1/*: any*/),
+    (v2/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -90,6 +100,7 @@ return {
       "plural": true,
       "selections": [
         (v0/*: any*/),
+        (v2/*: any*/),
         (v1/*: any*/),
         {
           "alias": null,
@@ -107,6 +118,6 @@ return {
 };
 })();
 
-(node as any).hash = "64d79380aaaed48f27d63a39fb1d9acb";
+(node as any).hash = "a79ec3a302cc3730c6bd150610b307e1";
 
 export default node;

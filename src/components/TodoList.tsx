@@ -3,22 +3,23 @@ import {graphql} from 'babel-plugin-relay/macro';
 import { useFragment } from "react-relay";
 import { Card, ListGroup, ListGroupItem, Tab } from "react-bootstrap";
 import { Variables } from "../utils/Variables";
-import { TaskCard } from "./TaskCard";
-import { TaskCard_task$key } from "./__generated__/TaskCard_task.graphql";
+import { TodoCard_todo$key } from "./__generated__/TodoCard_todo.graphql";
+import { TodoCard } from "./TodoCard";
 
 interface IProps {
-    taskList: (TaskCard_task$key | null)[]
+    todoList: (TodoCard_todo$key | null)[]
 }
 
-export function TaskList(props: IProps) {
-    const data = props.taskList
+export function TodoList(props: IProps){
+    // use the fragment above as a dependency for this component
+    const data = props.todoList;
     return (
         <>
             <ListGroup variant={Variables.LISTGROUP_VARIANT}>
-                {/* for every task in tasks create a listgroupitem with a card in it */}
-                {data.map((task, idx) => (
+                {/* for each element in todos create  a listgroupitem with a card in it */}
+                {data.map((todo, idx) => (
                 <ListGroupItem key={idx}>
-                    <TaskCard task={task}/>
+                    <TodoCard todo={todo}/>
                 </ListGroupItem>
                 ))}
             </ListGroup>

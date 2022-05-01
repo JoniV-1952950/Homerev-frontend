@@ -191,7 +191,7 @@ type Query {
 
     """The type of the tasks you are looking for"""
     type: ProjectType
-  ): [[Task]!]!
+  ): [Task]!
 }
 
 """The therapist type, requires role: patient or therapist to read"""
@@ -207,6 +207,9 @@ type Therapist {
 
   """The address of the therapist"""
   address: String!
+
+  """The email address of the therapist"""
+  email: String!
 
   """The telephone number of the therapist"""
   telephone: String!
@@ -240,6 +243,9 @@ type Patient {
 
   """The telephone number of the patient"""
   telephone: String!
+
+  """The email address of the patient"""
+  email: String!
 
   """The gender of the patient"""
   gender: Gender!
@@ -323,7 +329,7 @@ type Mutation {
   createPatient(
     """The information of the new patient"""
     patientInfo: PatientInput!
-  ): String
+  ): Patient
 
   """
   Update a patients personal information.
@@ -336,7 +342,7 @@ type Mutation {
 
     """The information of the patient"""
     patientInfo: PatientInput!
-  ): String
+  ): Patient
 
   """
   Delete a patient.
@@ -359,7 +365,7 @@ type Mutation {
 
     """The therapist information"""
     therapistInfo: TherapistInput!
-  ): String
+  ): Therapist
 
   """
   Delete a therapist.
@@ -382,7 +388,7 @@ type Mutation {
 
     """The task information"""
     taskInfo: TaskInput!
-  ): String
+  ): Task
 
   """
   Update a task of a patient.
@@ -398,7 +404,7 @@ type Mutation {
 
     """The task information"""
     taskInfo: TaskInput!
-  ): String
+  ): Task
 
   """
   Delete a task of a patient.
@@ -424,7 +430,7 @@ type Mutation {
 
     """The todo information"""
     todoInfo: TodoInput!
-  ): String
+  ): Todo
 
   """
   Update a todo of a patient.
@@ -440,7 +446,7 @@ type Mutation {
 
     """The todo information"""
     todoInfo: TodoInput!
-  ): String
+  ): Todo
 
   """
   Delete a todo. 

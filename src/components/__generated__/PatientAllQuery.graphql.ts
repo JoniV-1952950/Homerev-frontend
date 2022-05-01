@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2fc3c4bbca82d8d3e5f3634a73996695>>
+ * @generated SignedSource<<a123fe12f4a49a1d2960c7b17b969b39>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,12 +17,19 @@ export type Pagination = {
   perPage: number;
 };
 export type PatientAllQuery$variables = {
-  pagination: Pagination;
+  paginationTask: Pagination;
+  paginationTodo: Pagination;
   patientId: string;
 };
 export type PatientAllQuery$data = {
   readonly patient: {
-    readonly " $fragmentSpreads": FragmentRefs<"PatientCard_patient" | "TaskList_tasks">;
+    readonly tasks: ReadonlyArray<{
+      readonly " $fragmentSpreads": FragmentRefs<"TaskCard_task">;
+    } | null>;
+    readonly todos: ReadonlyArray<{
+      readonly " $fragmentSpreads": FragmentRefs<"TodoCard_todo">;
+    } | null>;
+    readonly " $fragmentSpreads": FragmentRefs<"PatientCard_patient">;
   };
 };
 export type PatientAllQuery = {
@@ -35,7 +42,12 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "pagination"
+    "name": "paginationTask"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "paginationTodo"
   },
   {
     "defaultValue": null,
@@ -50,25 +62,60 @@ v1 = [
     "variableName": "patientId"
   }
 ],
-v2 = {
+v2 = [
+  {
+    "kind": "Variable",
+    "name": "pagination",
+    "variableName": "paginationTask"
+  }
+],
+v3 = [
+  {
+    "kind": "Variable",
+    "name": "pagination",
+    "variableName": "paginationTodo"
+  }
+],
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "name",
   "storageKey": null
 },
-v3 = {
+v5 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "email",
+  "storageKey": null
+},
+v6 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "telephone",
   "storageKey": null
 },
-v4 = {
+v7 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
+  "storageKey": null
+},
+v8 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "dateCreated",
+  "storageKey": null
+},
+v9 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "type",
   "storageKey": null
 };
 return {
@@ -92,9 +139,36 @@ return {
             "name": "PatientCard_patient"
           },
           {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "TaskList_tasks"
+            "alias": null,
+            "args": (v2/*: any*/),
+            "concreteType": "Task",
+            "kind": "LinkedField",
+            "name": "tasks",
+            "plural": true,
+            "selections": [
+              {
+                "args": null,
+                "kind": "FragmentSpread",
+                "name": "TaskCard_task"
+              }
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": (v3/*: any*/),
+            "concreteType": "Todo",
+            "kind": "LinkedField",
+            "name": "todos",
+            "plural": true,
+            "selections": [
+              {
+                "args": null,
+                "kind": "FragmentSpread",
+                "name": "TodoCard_todo"
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
@@ -117,7 +191,7 @@ return {
         "name": "patient",
         "plural": false,
         "selections": [
-          (v2/*: any*/),
+          (v4/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -132,6 +206,7 @@ return {
             "name": "address",
             "storageKey": null
           },
+          (v5/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -139,7 +214,7 @@ return {
             "name": "condition",
             "storageKey": null
           },
-          (v3/*: any*/),
+          (v6/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -155,33 +230,22 @@ return {
             "name": "therapists",
             "plural": true,
             "selections": [
-              (v2/*: any*/),
-              (v3/*: any*/),
-              (v4/*: any*/)
+              (v4/*: any*/),
+              (v6/*: any*/),
+              (v5/*: any*/),
+              (v7/*: any*/)
             ],
             "storageKey": null
           },
           {
             "alias": null,
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "pagination",
-                "variableName": "pagination"
-              }
-            ],
+            "args": (v2/*: any*/),
             "concreteType": "Task",
             "kind": "LinkedField",
             "name": "tasks",
             "plural": true,
             "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "dateCreated",
-                "storageKey": null
-              },
+              (v8/*: any*/),
               {
                 "alias": null,
                 "args": null,
@@ -189,14 +253,36 @@ return {
                 "name": "task",
                 "storageKey": null
               },
+              (v9/*: any*/),
+              (v7/*: any*/)
+            ],
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": (v3/*: any*/),
+            "concreteType": "Todo",
+            "kind": "LinkedField",
+            "name": "todos",
+            "plural": true,
+            "selections": [
+              (v8/*: any*/),
               {
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
-                "name": "type",
+                "name": "todo",
                 "storageKey": null
               },
-              (v4/*: any*/)
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "deadline",
+                "storageKey": null
+              },
+              (v9/*: any*/),
+              (v7/*: any*/)
             ],
             "storageKey": null
           }
@@ -206,16 +292,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "77e6a6e6d9c142888a76e3509102a7e8",
+    "cacheID": "b53f2e92bbe43386ddd5e4a5e4af4936",
     "id": null,
     "metadata": {},
     "name": "PatientAllQuery",
     "operationKind": "query",
-    "text": "query PatientAllQuery(\n  $pagination: Pagination!\n  $patientId: String!\n) {\n  patient(id: $patientId) {\n    ...PatientCard_patient\n    ...TaskList_tasks\n  }\n}\n\nfragment PatientCard_patient on Patient {\n  name\n  birthdate\n  address\n  condition\n  telephone\n  gender\n  therapists {\n    name\n    telephone\n    id\n  }\n}\n\nfragment TaskList_tasks on Patient {\n  tasks(pagination: $pagination) {\n    dateCreated\n    task\n    type\n    id\n  }\n}\n"
+    "text": "query PatientAllQuery(\n  $paginationTask: Pagination!\n  $paginationTodo: Pagination!\n  $patientId: String!\n) {\n  patient(id: $patientId) {\n    ...PatientCard_patient\n    tasks(pagination: $paginationTask) {\n      ...TaskCard_task\n    }\n    todos(pagination: $paginationTodo) {\n      ...TodoCard_todo\n    }\n  }\n}\n\nfragment PatientCard_patient on Patient {\n  name\n  birthdate\n  address\n  email\n  condition\n  telephone\n  gender\n  therapists {\n    name\n    telephone\n    email\n    id\n  }\n}\n\nfragment TaskCard_task on Task {\n  dateCreated\n  task\n  type\n  id\n}\n\nfragment TodoCard_todo on Todo {\n  dateCreated\n  todo\n  deadline\n  type\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "dad956e0db33ec8fd900f11ea0c3cee0";
+(node as any).hash = "f3cddef9c82e5c982ea5bd84c90e6c22";
 
 export default node;

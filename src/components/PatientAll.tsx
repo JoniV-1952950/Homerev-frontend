@@ -5,14 +5,23 @@ import { PatientAllQuery } from "./__generated__/PatientAllQuery.graphql";
 import RelayEnvironment from "../utils/RelayEnvironment";
 import { PatientCard } from "./PatientCard";
 import { TaskList } from "./TaskList";
+import { TodoList } from "./TodoList";
 import { Card, ListGroup, ListGroupItem, Placeholder, Stack, Tab, Tabs } from "react-bootstrap";
+import { Variables } from "../utils/Variables";
+import { TaskCard_task$key } from "./__generated__/TaskCard_task.graphql";
+import { TodoCard_todo$key } from "./__generated__/TodoCard_todo.graphql";
 
-// Define a query
+// Define a query, uses the fragments defined in other components (TaskList, TodoList, PatientCard)
 export const patientAllQuery = graphql`
- query PatientAllQuery($pagination: Pagination!, $patientId: String!) {
+ query PatientAllQuery($paginationTask: Pagination!, $paginationTodo: Pagination!, $patientId: String!) {
     patient(id: $patientId) {
         ...PatientCard_patient
-        ...TaskList_tasks
+        tasks(pagination: $paginationTask){
+            ...TaskCard_task
+        }
+        todos(pagination: $paginationTodo){
+            ...TodoCard_todo
+        }
     }
 }
 `;
@@ -21,34 +30,50 @@ interface IProps {
     preloadedQuery: PreloadedQuery<PatientAllQuery, {}>
 }
 
+// component containing the all information
 function PatientAll(props: IProps){
     const data = usePreloadedQuery(patientAllQuery, props.preloadedQuery);
+    
+    let extraTab;
+    if(sessionStorage.getItem(Variables.ROLE) == Variables.THERAPIST_ROLE)
+        extraTab =  <Tab eventKey="addTodo" title="Add a todo">
+                        <p>To be implemented</p>
+                    </Tab>;
+    else if(sessionStorage.getItem(Variables.ROLE) == Variables.PATIENT_ROLE)
+        extraTab =  <Tab eventKey="addTask" title="Add a task">
+                        <p>To be implemented</p>
+                    </Tab>;
+    else
+        extraTab = null;
+
     return (
         <>
             <Stack gap={3}>            
                 <PatientCard patient={data.patient}/>
                 <Tabs defaultActiveKey="tasks">
                     <Tab eventKey="tasks" title="Tasks">
-                        <TaskList tasks={data.patient}/>
+                        <TaskList taskList={data.patient.tasks.map((fragment) => fragment as TaskCard_task$key)}/>
                     </Tab>
                     <Tab eventKey="todos" title="Todos">
-                        <PatientCard patient={data.patient} />
+                        <TodoList todoList={data.patient.todos.map((fragment) => fragment as TodoCard_todo$key)} />
                     </Tab>
+                    {extraTab}
                 </Tabs>
             </Stack>
         </>
     )
 }
 
+// a placeholder for the whole page while loading, could split this up over the components
 const placeholder = (
     <>
         <Stack gap={3}>            
             <Card>
                 <Card.Body>
-                <Placeholder as={Card.Title} animation="glow">
+                <Placeholder as={Card.Title} animation={Variables.PLACEHOLDER_ANIMATION}>
                     <Placeholder xs={6} />
                 </Placeholder>
-                <Placeholder as={Card.Text} animation="glow">
+                <Placeholder as={Card.Text} animation={Variables.PLACEHOLDER_ANIMATION}>
                     <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
                     <Placeholder xs={6} /> <Placeholder xs={8} />
                 </Placeholder>
@@ -57,14 +82,14 @@ const placeholder = (
             <Tabs defaultActiveKey="tasks">
                 <Tab eventKey="tasks" title="Tasks">
                     <ListGroup>
-                        {Array.from({ length: 10}).map((_, idx) => (
-                            <ListGroupItem variant="flush">
+                        {Array.from({ length: Variables.TASKS_TODOS_PER_PAGE}).map((_, idx) => (
+                            <ListGroupItem variant={Variables.LISTGROUP_VARIANT}>
                                 <Card>
                                     <Card.Body>
-                                        <Placeholder as={Card.Title} animation="glow">
+                                        <Placeholder as={Card.Title} animation={Variables.PLACEHOLDER_ANIMATION}>
                                             <Placeholder xs={6} />
                                         </Placeholder>
-                                        <Placeholder as={Card.Text} animation="glow">
+                                        <Placeholder as={Card.Text} animation={Variables.PLACEHOLDER_ANIMATION}>
                                             <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
                                             <Placeholder xs={6} /> <Placeholder xs={8} />
                                         </Placeholder>
@@ -76,14 +101,14 @@ const placeholder = (
                 </Tab>
                 <Tab eventKey="todos" title="Todos">
                     <ListGroup>
-                        {Array.from({ length: 10}).map((_, idx) => (
-                            <ListGroupItem variant="flush">
+                        {Array.from({ length: Variables.TASKS_TODOS_PER_PAGE}).map((_, idx) => (
+                            <ListGroupItem variant={Variables.LISTGROUP_VARIANT}>
                                 <Card>
                                     <Card.Body>
-                                        <Placeholder as={Card.Title} animation="glow">
+                                        <Placeholder as={Card.Title} animation={Variables.PLACEHOLDER_ANIMATION}>
                                             <Placeholder xs={6} />
                                         </Placeholder>
-                                        <Placeholder as={Card.Text} animation="glow">
+                                        <Placeholder as={Card.Text} animation={Variables.PLACEHOLDER_ANIMATION}>
                                             <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
                                             <Placeholder xs={6} /> <Placeholder xs={8} />
                                         </Placeholder>
@@ -98,6 +123,7 @@ const placeholder = (
     </>
 )
 
+// component containing the relay environment and suspense
 function PatientAllRoot(props: IProps) {
     return (
         <>
