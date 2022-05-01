@@ -44,7 +44,7 @@ class Home extends React.Component<IProps, IState> {
                         pagination: {
                             perPage: Variables.PATIENTS_PER_PAGE
                         },
-                        therapistId: firebase.auth().currentUser?.uid as string,
+                        therapistId: sessionStorage.getItem(Variables.UID) as string,
                         name: value
                     })
             });
