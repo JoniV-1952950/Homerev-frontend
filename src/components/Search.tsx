@@ -1,5 +1,5 @@
 import React, { KeyboardEvent } from "react";
-import { Form, Container, InputGroup, Button, Col } from "react-bootstrap";
+import { Form, Container, InputGroup, Button } from "react-bootstrap";
 
 interface IProps {
     searchPatients: (value: string | null) => void

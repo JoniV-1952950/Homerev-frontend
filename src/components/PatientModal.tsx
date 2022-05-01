@@ -1,7 +1,7 @@
 import { Suspense, useState } from "react";
 import {graphql} from 'babel-plugin-relay/macro';
 import { Button, Form, Modal, Row, Col} from "react-bootstrap";
-import { commitLocalUpdate, commitMutation, PreloadedQuery, RelayEnvironmentProvider, useFragment, usePreloadedQuery } from "react-relay";
+import { commitMutation, PreloadedQuery, RelayEnvironmentProvider, useFragment, usePreloadedQuery } from "react-relay";
 import RelayEnvironment from "../utils/RelayEnvironment";
 import { Variables } from "../utils/Variables";
 import { PatientModalUpdateMutation } from "./__generated__/PatientModalUpdateMutation.graphql";
@@ -24,7 +24,7 @@ function PatientForm(props: { data?: PatientCard_patient$data}) {
             // get the values from the form (HTMLInputElements)
             let input = Object.values(form).map((element: HTMLInputElement) => {
                         // if the value is "on" this element is a radio button from the gender
-                        if(element.value == "on"){
+                        if(element.value === "on"){
                             // if the radio is defaultChecked return a JSON object with key: "gender" and value: the chosen gender
                             if(element.checked)
                                 return {key: "gender", value: element.nextSibling?.textContent};
@@ -35,9 +35,9 @@ function PatientForm(props: { data?: PatientCard_patient$data}) {
                         return {key: element.previousSibling?.textContent?.toLowerCase().split(' ')[0] as string, value: element.value};
                 })
                 // filter the array of object with null elements, undefined elements and empty strings
-                .filter((pair) => pair != null && pair.value != "" && pair.value != undefined)
+                .filter((pair) => pair != null && pair.value !== "" && pair.value != undefined)
                 // reduce the array to one object
-                .reduce((obj: any, item) => (obj[item?.key as string] = item?.value, obj) ,{});
+                .reduce((obj: any, item) => (obj[item?.key as string] = item?.value, obj), {});
             
             // create the name from the first and name inputs
             input.name = input.name + " " + input["first"];
@@ -104,7 +104,10 @@ function PatientForm(props: { data?: PatientCard_patient$data}) {
             onError: error => {console.log(error); alert("Something went wrong trying to update a patient." + error)} /* Mutation errored */,
             onCompleted: response => {
                 if(response.updatePatient == null) alert("Something went wrong trying to update a patient. Maybe the email address already exists in our system.");
-                else window.location.href = window.location.href;
+                else {
+                    const href = window.location.href 
+                    window.location.href = href;
+                }
             } /* Mutation completed */,
         });
     }
@@ -138,9 +141,9 @@ function PatientForm(props: { data?: PatientCard_patient$data}) {
             </Form.Group> 
             <Form.Group as={Col} className="mb-3" controlId="genderInput">
                 <Form.Label>Gender</Form.Label><br/>
-                <Form.Check inline type="radio" label="M" name="gender" defaultChecked={props.data?.gender == "M"} required/>
-                <Form.Check inline type="radio" label="V" name="gender" defaultChecked={props.data?.gender == "V"} required/>
-                <Form.Check inline type="radio" label="X" name="gender" defaultChecked={props.data?.gender == "X"} required/>
+                <Form.Check inline type="radio" label="M" name="gender" defaultChecked={props.data?.gender === "M"} required/>
+                <Form.Check inline type="radio" label="V" name="gender" defaultChecked={props.data?.gender === "V"} required/>
+                <Form.Check inline type="radio" label="X" name="gender" defaultChecked={props.data?.gender === "X"} required/>
                 <Form.Control.Feedback type="invalid">
                     Please choose a gender.
                 </Form.Control.Feedback>

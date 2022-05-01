@@ -1,6 +1,5 @@
 import {graphql} from 'babel-plugin-relay/macro';
 import { Suspense } from 'react';
-import { Col, Nav, Row, Tab } from 'react-bootstrap';
 import { PreloadedQuery, RelayEnvironmentProvider, usePreloadedQuery } from 'react-relay';
 import RelayEnvironment from '../utils/RelayEnvironment';
 import { TaskList } from './TaskList';

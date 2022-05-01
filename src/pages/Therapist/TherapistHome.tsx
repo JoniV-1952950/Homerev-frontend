@@ -1,11 +1,9 @@
-import React, { KeyboardEvent, ReactNode } from "react";
 import { Button, Container, Stack } from "react-bootstrap";
-import { loadQuery, PreloadedQuery, RelayEnvironmentProvider } from "react-relay/hooks";
+import { loadQuery, PreloadedQuery } from "react-relay/hooks";
 import PatientCardsList, { patientCardsListQuery } from "../../components/PatientCardsList";
 import Search from "../../components/Search";
 import type {PatientCardsListQuery} from '../../components/__generated__/PatientCardsListQuery.graphql';
 import RelayEnvironment from "../../utils/RelayEnvironment";
-import firebase from "firebase/compat/app";
 import PatientModal from "../../components/PatientModal";
 import { Variables } from "../../utils/Variables";
 

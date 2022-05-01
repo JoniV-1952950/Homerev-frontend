@@ -35,11 +35,11 @@ function PatientAll(props: IProps){
     const data = usePreloadedQuery(patientAllQuery, props.preloadedQuery);
     
     let extraTab;
-    if(sessionStorage.getItem(Variables.ROLE) == Variables.THERAPIST_ROLE)
+    if(sessionStorage.getItem(Variables.ROLE) === Variables.THERAPIST_ROLE)
         extraTab =  <Tab eventKey="addTodo" title="Add a todo">
                         <p>To be implemented</p>
                     </Tab>;
-    else if(sessionStorage.getItem(Variables.ROLE) == Variables.PATIENT_ROLE)
+    else if(sessionStorage.getItem(Variables.ROLE) === Variables.PATIENT_ROLE)
         extraTab =  <Tab eventKey="addTask" title="Add a task">
                         <p>To be implemented</p>
                     </Tab>;

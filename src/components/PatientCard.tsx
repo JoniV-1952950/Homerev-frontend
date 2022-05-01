@@ -2,10 +2,9 @@ import {graphql} from 'babel-plugin-relay/macro';
 import {
   useFragment,
 } from 'react-relay/hooks';
-import { Card, Col, Container, ListGroup, ListGroupItem, Placeholder, Row } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { PatientCard_patient$key } from './__generated__/PatientCard_patient.graphql';
 import { Variables } from '../utils/Variables';
-import { Link } from 'react-router-dom';
 
 // Define a query
 export const patientCardFragment = graphql`

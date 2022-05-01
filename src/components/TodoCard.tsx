@@ -1,7 +1,6 @@
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 import {graphql} from 'babel-plugin-relay/macro';
 import { Variables } from "../utils/Variables";
-import { TaskCard_task$key } from "./__generated__/TaskCard_task.graphql";
 import { useFragment } from "react-relay";
 import { TodoCard_todo$key } from "./__generated__/TodoCard_todo.graphql";
 

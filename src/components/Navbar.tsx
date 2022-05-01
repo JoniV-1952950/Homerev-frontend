@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
 import Navbar from 'react-bootstrap/Navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Nav, Modal, Button } from 'react-bootstrap';
-import { SignIn, SignOut } from '../utils/Firebase';
+import { Container, Nav } from 'react-bootstrap';
+import { SignOut } from '../utils/Firebase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { Variables } from '../utils/Variables';
@@ -15,10 +14,6 @@ interface IState {
 }
 
 class MyNavbar extends React.Component<IProps, IState>{
-    constructor(props: IProps){
-        super(props);     
-    }
-
     render(){
         const user = firebase.auth().currentUser;
         let navItem;

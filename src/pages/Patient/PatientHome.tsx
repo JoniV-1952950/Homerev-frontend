@@ -1,5 +1,5 @@
 import React from "react";
-import { commitMutation, loadQuery, PreloadedQuery, RelayEnvironmentProvider, usePreloadedQuery } from "react-relay/hooks";
+import { commitMutation, loadQuery, PreloadedQuery } from "react-relay/hooks";
 import RelayEnvironment from "../../utils/RelayEnvironment";
 import { Button, Container, Stack } from "react-bootstrap";
 import {graphql} from 'babel-plugin-relay/macro';
