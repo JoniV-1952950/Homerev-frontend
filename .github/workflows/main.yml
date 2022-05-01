@@ -27,7 +27,7 @@ jobs:
         npm install
     - name: Build react
       run: |
-        npm build
+        npm run build
     # Deploying the functions to firebase
     - name:  Deploy to Firebase
       uses: w9jds/firebase-action@master
