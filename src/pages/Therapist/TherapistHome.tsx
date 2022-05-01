@@ -6,6 +6,7 @@ import type {PatientCardsListQuery} from '../../components/__generated__/Patient
 import RelayEnvironment from "../../utils/RelayEnvironment";
 import PatientModal from "../../components/PatientModal";
 import { Variables } from "../../utils/Variables";
+import React from "react";
 
 interface IProps {
 }
