@@ -22,7 +22,7 @@ class Search extends React.Component<IProps, IState> {
 
     // if the key pressed was the enter key search for patients
     handleKeyPress(event: KeyboardEvent) {
-        if(event.key == "Enter") {
+        if(event.key === "Enter") {
             this.props.searchPatients(this.state.searchName)
         }
     }

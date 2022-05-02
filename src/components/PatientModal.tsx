@@ -35,9 +35,9 @@ function PatientForm(props: { data?: PatientCard_patient$data}) {
                         return {key: element.previousSibling?.textContent?.toLowerCase().split(' ')[0] as string, value: element.value};
                 })
                 // filter the array of object with null elements, undefined elements and empty strings
-                .filter((pair) => pair != null && pair.value !== "" && pair.value != undefined)
+                .filter((pair) => pair != null && pair.value !== "" && pair.value !== undefined)
                 // reduce the array to one object
-                .reduce((obj: any, item) => (obj[item?.key as string] = item?.value, obj), {});
+                .reduce((obj: any, item) => ((obj[item?.key as string] = item?.value, obj)), {});
             
             // create the name from the first and name inputs
             input.name = input.name + " " + input["first"];
