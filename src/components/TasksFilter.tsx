@@ -34,7 +34,7 @@ export class TasksFilter extends React.Component<IProps, IState>{
                     <Form.Control type="number" defaultValue={5} onChange={(event) => this.setState(prevState => ({searchObject: {...prevState.searchObject, nrTasksPerPatient: parseInt(event.target.value)}}))} required/>
                 </Form.Group>
                 <Form.Group as={Col} className="mb-3" controlId="conditionInput">
-                    <Form.Label>Nr of tasks per patient</Form.Label>
+                    <Form.Label>Condition</Form.Label>
                     <Form.Control type="text" placeholder="e.g. Motor impairment" onChange={(event) => this.setState(prevState => ({searchObject: {...prevState.searchObject, condition: event.target.value}}))}/>
                     <Form.Text muted>This must be an exact match.</Form.Text>
                 </Form.Group>
