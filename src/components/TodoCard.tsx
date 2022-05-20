@@ -24,7 +24,7 @@ export function TodoCard(props: {todo?: TodoCard_todo$key | null}) {
                 <Card.Text>
                     Created at: {new Date(todo?.dateCreated).toLocaleString()} 
                     <br/>
-                    Deadline: {todo?.deadline}
+                    Deadline: {new Date(todo?.deadline).toLocaleString()}
                     <br/>
                     Type of project: {todo?.type}
                     <br/>
