@@ -30,7 +30,7 @@ interface IProps {
     preloadedQuery: PreloadedQuery<PatientAllQuery, {}>
 }
 
-// component containing the all information
+// component containing all the information
 function PatientAll(props: IProps){
     const data = usePreloadedQuery(patientAllQuery, props.preloadedQuery);
     
@@ -123,7 +123,7 @@ const placeholder = (
     </>
 )
 
-// component containing the relay environment and suspense
+// component containing the relay environment and suspense, relay environment is needed to make the query
 function PatientAllRoot(props: IProps) {
     return (
         <>

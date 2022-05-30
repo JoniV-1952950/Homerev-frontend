@@ -18,6 +18,10 @@ interface IProps {
     preloadedQuery: PreloadedQuery<TaskTabsQuery>
 }
 
+
+// at first I wanted to create tabs per different patient to show the tasks when a student asks for it (from there the TaskTabs name)
+// relay did not want this to work properly (had problems with two dimensional list of the response), so I changed it to a task list instead... 
+// could be solved in the future
 function TaskTabs(props: IProps) {
     const data = usePreloadedQuery(taskTabsQuery, props.preloadedQuery); 
     console.log(data.tasksOfPatients)

@@ -75,9 +75,12 @@ class App extends React.Component<IProps, IState> {
         </>
       );
     else return (
+      <>
+      <Navbar/>
       <Alert variant="warning">
         You should have a valid account to do stuff here
       </Alert>
+      </>
     )
   }
 }
